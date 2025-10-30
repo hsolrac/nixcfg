@@ -1,0 +1,129 @@
+{ config, pkgs, ... }:
+
+{
+  imports =
+    [ 
+      /etc/nixos/hardware-configuration.nix
+    ];
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  networking.hostName = "nixos";
+  networking.networkmanager.enable = true;
+  networking.extraHosts = ''
+  '';
+
+	virtualisation.vmware.host.enable = true; 
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  time.timeZone = "America/Sao_Paulo";
+
+  i18n.defaultLocale = "pt_BR.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "pt_BR.UTF-8";
+    LC_IDENTIFICATION = "pt_BR.UTF-8";
+    LC_MEASUREMENT = "pt_BR.UTF-8";
+    LC_MONETARY = "pt_BR.UTF-8";
+    LC_NAME = "pt_BR.UTF-8";
+    LC_NUMERIC = "pt_BR.UTF-8";
+    LC_PAPER = "pt_BR.UTF-8";
+    LC_TELEPHONE = "pt_BR.UTF-8";
+    LC_TIME = "pt_BR.UTF-8";
+  };
+
+  services.xserver.enable = true;
+
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.desktopManager.cinnamon.enable = true;
+
+  services.xserver.xkb = {
+    layout = "br";
+    variant = "thinkpad";
+  };
+
+  services.printing.enable = true;
+
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+  # Enable docker.
+  systemd.services.docker = {
+    enable = true;
+    description = "Docker Daemon";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.docker}/bin/dockerd -H unix:///var/run/docker.sock";
+      Restart = "always";
+    };
+  };
+
+  users.users.carlos = {
+    isNormalUser = true;
+    description = "carlos";
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
+		shell = pkgs.fish;
+    packages = with pkgs; [
+      tree
+    ];
+  };
+
+  users.defaultUserShell = pkgs.fish;
+  programs.firefox.enable = true;
+  programs.fish.enable = true;
+
+  nixpkgs.config.permittedInsecurePackages = [
+     "beekeeper-studio-5.1.5"
+  ];
+
+  nixpkgs.config.allowUnfree = true;
+
+  environment.systemPackages = with pkgs; [
+    neovim
+    wget
+    git 
+    unzip 
+    gzip 
+    tmux
+    gcc
+    google-chrome 
+    fish
+    yarn
+    nodejs
+    docker
+    jq    
+    ripgrep
+    fzf
+    kitty
+    discord
+    direnv
+    nix-direnv
+    postman
+    libreoffice
+    maim
+    flameshot
+    mongodb-compass
+    xclip
+    feh
+    tmuxinator
+    usql
+    picom
+    pavucontrol
+    gnumake
+    docker 
+    docker-compose
+  ];
+
+  services.openssh.enable = true;
+
+  system.stateVersion = "25.05";
+}
