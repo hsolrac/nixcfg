@@ -5,6 +5,6 @@ with lib;
 {
 	imports = [
 		./dev-tools.nix
-    ./i3wm.nix
+    ./i3
 	];
 }

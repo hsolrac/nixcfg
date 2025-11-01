@@ -4,6 +4,7 @@
   imports =
     [ 
       /etc/nixos/hardware-configuration.nix
+  	  ./modules
     ];
 
   boot.loader.systemd-boot.enable = true;
@@ -36,8 +37,6 @@
 
   services.xserver.enable = true;
 
-  services.xserver.displayManager.lightdm.enable = true;
-
   services.xserver.xkb = {
     layout = "br";
     variant = "thinkpad";
@@ -55,16 +54,7 @@
   };
 
   # Enable docker.
-  systemd.services.docker = {
-    enable = true;
-    description = "Docker Daemon";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.docker}/bin/dockerd -H unix:///var/run/docker.sock";
-      Restart = "always";
-    };
-  };
+ virtualisation.docker.enable = true; 
 
   users.users.carlos = {
     isNormalUser = true;
@@ -94,7 +84,6 @@
     gzip 
     tmux
     google-chrome 
-    fish
     kitty
     discord
     direnv
@@ -108,6 +97,7 @@
     tmuxinator
     picom
     pavucontrol
+		nixfmt
   ];
 
   services.openssh.enable = true;
