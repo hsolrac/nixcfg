@@ -35,7 +35,7 @@
         system = "x86_64-linux";
         modules = [
           ./configuration.nix
-          ./modules/dev-tools.nix
+          ./modules/default.nix
         ];
       };
     };

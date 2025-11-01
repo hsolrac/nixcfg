@@ -37,7 +37,6 @@
   services.xserver.enable = true;
 
   services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.cinnamon.enable = true;
 
   services.xserver.xkb = {
     layout = "br";
@@ -94,15 +93,8 @@
     unzip 
     gzip 
     tmux
-    gcc
     google-chrome 
     fish
-    yarn
-    nodejs
-    docker
-    jq    
-    ripgrep
-    fzf
     kitty
     discord
     direnv
@@ -111,17 +103,11 @@
     libreoffice
     maim
     flameshot
-    mongodb-compass
     xclip
     feh
     tmuxinator
-    usql
     picom
     pavucontrol
-    gnumake
-    docker 
-    docker-compose
-		beekeeper-studio
   ];
 
   services.openssh.enable = true;
