@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   imports = [
@@ -7,6 +7,7 @@
     ../../modules/blog/default.nix
     ../../modules/cloudflared/default.nix
     ../../modules/pi-hole/default.nix
+		../../modules/znc/default.nix
   ];
 
   # Override common hostname for this specific host
