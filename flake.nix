@@ -2,6 +2,8 @@
   description = "NixOS configuration Carl0xs";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,7 +22,16 @@
     };
   };
 
+  outputs =
+    { self
+    , nixpkgs
+    , home-manager
+    , nixvim
+    , niri
+    , neovim-nightly-overlay
   outputs = { self, nixpkgs, home-manager, nixvim, niri, neovim-nightly-overlay }@inputs:
+    , sops-nix
+    }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -46,6 +57,7 @@
         homelab = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
+            sops-nix.nixosModules.sops
             ./hosts/homelab/default.nix
             ./hosts/homelab/hardware-configuration.nix
           ];
