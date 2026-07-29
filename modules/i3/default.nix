@@ -1,6 +1,8 @@
 { ... }:
 
 {
+  home.file.".config/i3status-rust/config.toml".source = ./status-rust.toml;
+
   home.file.".config/i3/config".text = ''
     set $mod Mod4
 
@@ -12,7 +14,7 @@
     exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
     exec --no-startup-id nm-applet
 
-    set $refresh_i3status killall -SIGUSR1 i3status
+    set $refresh_i3status killall -SIGUSR1 i3status-rs
 
     # Screenshots
     bindsym Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
@@ -127,7 +129,7 @@
 
     # Bar
     bar {
-      status_command i3status
+      status_command i3status-rs
     }
 
     # Window rules
