@@ -24,7 +24,7 @@
       pcmanfm
       shared-mime-info
       fuzzel
-      i3status
+      i3status-rust
       maim
       xclip
       feh
