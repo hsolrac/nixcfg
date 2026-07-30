@@ -2,8 +2,15 @@
   description = "NixOS configuration Carl0xs";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    blog.url = "github:carl0xs/blog";
+
+    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,8 +36,9 @@
     , nixvim
     , niri
     , neovim-nightly-overlay
-  outputs = { self, nixpkgs, home-manager, nixvim, niri, neovim-nightly-overlay }@inputs:
+    , deploy-rs
     , sops-nix
+    , blog
     }@inputs:
     let
       system = "x86_64-linux";
@@ -39,9 +47,22 @@
         inherit inputs;
         extraHostsFromEnv = builtins.getEnv "EXTRA_HOSTS";
       };
+  		hostIp = builtins.getEnv "HOST_IP";
     in
     {
       formatter.${system} = pkgs.nixpkgs-fmt;
+
+      deploy.nodes.homelab = {
+        hostname = hostIp;
+
+        profiles.system = {
+          user = "root";
+
+          path =
+            deploy-rs.lib.${system}.activate.nixos
+              self.nixosConfigurations.homelab;
+        };
+      };
 
       nixosConfigurations = {
         workstation = nixpkgs.lib.nixosSystem {
