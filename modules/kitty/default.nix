@@ -10,7 +10,7 @@
       #: individual font faces and even specify special fonts for particular
       #: characters.
       
-      font_family      FiraCode Nerd Font
+      font_family      Iosevka
       bold_font        auto
       italic_font      auto
       bold_italic_font auto
@@ -27,7 +27,7 @@
       #:     italic_font      Operator Mono Book Italic
       #:     bold_italic_font Operator Mono Medium Italic
       
-      font_size 10.0
+      font_size 11.0
       
       #: Font size (in pts)
       
@@ -742,7 +742,7 @@
       
       #: The foreground and background colors
       
-      background_opacity 1
+      background_opacity 0.7
       
       #: The opacity of the background. A number between 0 and 1, where 1 is
       #: opaque and 0 is fully transparent.  This will only work if

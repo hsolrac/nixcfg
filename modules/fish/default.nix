@@ -13,7 +13,7 @@
       gcb = "git checkout -b";
       glg = "git lg";
       gco = "git checkout";
-      ls = "ls -lah";
+      ls = "ls -lh";
     };
 
     shellAbbrs = {
