@@ -21,6 +21,12 @@
       			bind k select-pane -U
       			bind l select-pane -R
 
+						# Resize panes
+						bind -r H resize-pane -L 5
+						bind -r J resize-pane -D 5
+						bind -r K resize-pane -U 5
+						bind -r L resize-pane -R 5
+
       			# Enter copy-mode with vi-style key
       			bind-key [ copy-mode
 

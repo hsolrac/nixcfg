@@ -1,7 +1,7 @@
 { ... }:
 {
-	services.znc = {
-		enable = true; 
-		openFirewall = true;
-	};
+  services.znc = {
+    enable = true;
+    openFirewall = true;
+  };
 }
