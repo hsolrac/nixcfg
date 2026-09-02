@@ -5,7 +5,7 @@
     ../../modules/common/default.nix
     ../../modules/home-manager/default.nix
     ../../modules/desktop/default.nix
-    ../../modules/tailscale/default.nix
+    ../../modules/services/tailscale/default.nix
   ];
 
   networking.hostName = "workstation";
