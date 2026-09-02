@@ -3,11 +3,11 @@
 {
   imports = [
     ../../modules/common/default.nix
-    ../../modules/tailscale/default.nix
-    ../../modules/blog/default.nix
-    ../../modules/cloudflared/default.nix
-    ../../modules/pi-hole/default.nix
-    ../../modules/znc/default.nix
+    ../../modules/services/tailscale/default.nix
+    ../../modules/services/blog/default.nix
+    ../../modules/services/cloudflared/default.nix
+    ../../modules/services/pi-hole/default.nix
+    ../../modules/services/znc/default.nix
   ];
 
   # Override common hostname for this specific host

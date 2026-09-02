@@ -1,35 +1,11 @@
 { pkgs, inputs, ... }:
 
 {
-  home-manager.sharedModules = [
-    inputs.niri.homeModules.niri
-    ../kitty/default.nix
-    ../rofi/default.nix
-    ../walker/default.nix
-    ../i3/default.nix
+  imports = [
+    ./home.nix
   ];
 
-  home-manager.users.carlos = { pkgs, ... }: {
-    home.packages = with pkgs; [
-      google-chrome
-      discord
-      libreoffice
-      beekeeper-studio
-      grim
-      slurp
-      wl-clipboard
-      swaybg
-      pavucontrol
-      brightnessctl
-      pcmanfm
-      shared-mime-info
-      fuzzel
-      i3status-rust
-      maim
-      xclip
-      feh
-    ];
-  };
+  programs.fish.enable = true;
 
   # X Server
   services.xserver.enable = true;
@@ -72,7 +48,6 @@
   services.xserver.windowManager.i3.enable = true;
 
   # GUI Programs
-  programs.firefox.enable = true;
   programs.nix-ld.enable = true;
   programs.steam.enable = true;
   programs.gamemode.enable = true;

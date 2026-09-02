@@ -75,7 +75,7 @@
                 set -l nvim_dir "$HOME/.config/nvim"
                 set -l nvim_backup "$HOME/.config/nvim.backup"
 
-                set -l choice (ls -d $base_dir/*/ | xargs -n 1 basename | fzf --prompt="Choose configuration: " --height=20% --reverse)
+                set -l choice (find $base_dir -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | fzf --prompt="Choose configuration: " --height=20% --reverse)
 
                 if test -z "$choice"
                     echo "No configuration selected."

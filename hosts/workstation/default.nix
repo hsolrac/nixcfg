@@ -3,12 +3,13 @@
 {
   imports = [
     ../../modules/common/default.nix
-    ../../modules/home-manager/default.nix
     ../../modules/desktop/default.nix
-    ../../modules/tailscale/default.nix
+    ../../modules/services/tailscale/default.nix
   ];
 
   networking.hostName = "workstation";
+
+  users.users.carlos.shell = pkgs.fish;
 
   virtualisation.docker.enable = true;
 
@@ -17,11 +18,11 @@
     127.0.0.1 local.recebiveis.fintera.com.br
     127.0.0.1 local.financeiro.fintera.com.br
     127.0.0.1 local.faturamento.fintera.com.br
+    127.0.0.1 local.analises.fintera.com.br
   '';
 
   nix.settings.trusted-users = [ "root" "carlos" ];
 
-  nixpkgs.config.allowUnfree = true;
   nixpkgs.config.permittedInsecurePackages = [
     "beekeeper-studio-5.5.3"
   ];
