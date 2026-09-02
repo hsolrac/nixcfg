@@ -10,9 +10,6 @@
 	};
 
 	home.packages = with pkgs; [
-		ripgrep
-		fzf
 		stdenv.cc
-		lazygit
 	];
 }

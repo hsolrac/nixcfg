@@ -9,6 +9,8 @@
 
     sharedModules = [
       inputs.nixvim.homeModules.nixvim
+      ./packages/gui.nix
+      ./packages/dev.nix
       ./fish.nix
       ./git.nix
       ./nvim/default.nix
@@ -19,7 +21,7 @@
       ./google-chrome.nix
     ];
 
-    users.carlos = { pkgs, ... }: {
+    users.carlos = { ... }: {
       home.username = "carlos";
       home.homeDirectory = "/home/carlos";
       home.stateVersion = "25.05";
@@ -32,47 +34,6 @@
       home.sessionVariables = {
         PNPM_HOME = "$HOME/.local/share/pnpm";
       };
-
-      home.packages = with pkgs; [
-        discord
-        libreoffice
-        beekeeper-studio
-        grim
-        slurp
-        wl-clipboard
-        swaybg
-        pavucontrol
-        brightnessctl
-        pcmanfm
-        shared-mime-info
-        fuzzel
-        i3status-rust
-        maim
-        xclip
-        feh
-        tree
-        gnumake
-        gcc
-        jq
-        ripgrep
-        fzf
-        curl
-        rsync
-        bat
-        lazygit
-        direnv
-        docker
-        docker-compose
-        usql
-        zoxide
-        htop
-        fastfetch
-        bash-language-server
-        ranger
-        gh
-        weechat
-        tree-sitter
-      ];
     };
   };
 }
