@@ -1,35 +1,9 @@
 { pkgs, inputs, ... }:
 
 {
-  home-manager.sharedModules = [
-    inputs.niri.homeModules.niri
-    ../kitty/default.nix
-    ../rofi/default.nix
-    ../walker/default.nix
-    ../i3/default.nix
+  imports = [
+    ./home.nix
   ];
-
-  home-manager.users.carlos = { pkgs, ... }: {
-    home.packages = with pkgs; [
-      google-chrome
-      discord
-      libreoffice
-      beekeeper-studio
-      grim
-      slurp
-      wl-clipboard
-      swaybg
-      pavucontrol
-      brightnessctl
-      pcmanfm
-      shared-mime-info
-      fuzzel
-      i3status-rust
-      maim
-      xclip
-      feh
-    ];
-  };
 
   # X Server
   services.xserver.enable = true;

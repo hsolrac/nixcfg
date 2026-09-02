@@ -3,7 +3,6 @@
 {
   imports = [
     ../../modules/common/default.nix
-    ../../modules/home-manager/default.nix
     ../../modules/desktop/default.nix
     ../../modules/services/tailscale/default.nix
   ];
