@@ -6,7 +6,8 @@
 		package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
 		viAlias = true;
 		vimAlias = true;
-		initLua = builtins.readFile ./init.lua;
+
+    extraConfigLua = builtins.readFile ./init.lua;
 	};
 
 	home.packages = with pkgs; [
