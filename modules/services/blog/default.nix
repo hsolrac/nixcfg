@@ -19,7 +19,7 @@
       Group = "users";
 
       ExecStart =
-        "${inputs.blog.packages.${pkgs.system}.blog}/bin/blog start";
+        "${inputs.blog.packages.${pkgs.system}.default}/bin/blog start";
 
       Restart = "on-failure";
 

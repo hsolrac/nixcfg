@@ -15,16 +15,16 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -34,11 +34,11 @@
     , nixpkgs
     , home-manager
     , nixvim
-    , niri
     , neovim-nightly-overlay
     , deploy-rs
     , sops-nix
     , blog
+    , firefox-addons
     }@inputs:
     let
       system = "x86_64-linux";
@@ -77,6 +77,7 @@
 
         homelab = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = specialArgs;
           modules = [
             sops-nix.nixosModules.sops
             ./hosts/homelab/default.nix
