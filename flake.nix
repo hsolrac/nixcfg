@@ -47,7 +47,7 @@
         inherit inputs;
         extraHostsFromEnv = builtins.getEnv "EXTRA_HOSTS";
       };
-  		hostIp = builtins.getEnv "HOST_IP";
+      hostIp = builtins.getEnv "HOST_IP";
     in
     {
       formatter.${system} = pkgs.nixpkgs-fmt;

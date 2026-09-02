@@ -5,7 +5,7 @@
     enable = true;
 
     profiles.default = {
-      search =  {
+      search = {
         force = true;
         default = "DuckDuckGo";
         privateDefault = "DuckDuckGo";
@@ -28,15 +28,15 @@
     };
 
     policies = {
-      AppAutoUpdate                 = false;
-      BackgroundAppUpdate           = false;
+      AppAutoUpdate = false;
+      BackgroundAppUpdate = false;
 
       DisableTelemetry = true;
 
       # Access Restrictions
-      BlockAboutConfig              = false;
-      BlockAboutProfiles            = true;
-      BlockAboutSupport             = true;
+      BlockAboutConfig = false;
+      BlockAboutProfiles = true;
+      BlockAboutSupport = true;
     };
   };
 }

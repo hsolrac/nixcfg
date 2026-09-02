@@ -16,15 +16,15 @@
 
   # Fonts
   fonts = {
-		fontconfig = {
-			defaultFonts = {
-				monospace = ["Iosevka"];
-			};
-		};
+    fontconfig = {
+      defaultFonts = {
+        monospace = [ "Iosevka" ];
+      };
+    };
     enableDefaultPackages = true;
     packages = with pkgs; [
       nerd-fonts.fira-code
-			iosevka
+      iosevka
     ];
   };
 
