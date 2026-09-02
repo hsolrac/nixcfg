@@ -19,6 +19,7 @@
       ./rofi.nix
       ./i3/default.nix
       ./google-chrome.nix
+      ./firefox.nix
     ];
 
     users.carlos = { ... }: {
