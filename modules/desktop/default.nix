@@ -5,6 +5,8 @@
     ./home.nix
   ];
 
+  programs.fish.enable = true;
+
   # X Server
   services.xserver.enable = true;
   services.xserver.xkb = {
