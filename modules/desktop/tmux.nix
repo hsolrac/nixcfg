@@ -68,6 +68,9 @@
 
             			# bell
             			set-window-option -g window-status-bell-style "fg=#3c3836,bg=#fb4934"
+
+                  set -g automatic-rename on
+                  set -g automatic-rename-format '#{b:pane_current_path}'
     '';
   };
 }
