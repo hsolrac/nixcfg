@@ -39,14 +39,23 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window'})
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window'})
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window'})
+vim.keymap.set('n', '<leader-q>',   ':bd<CR>', {})
+
 vim.keymap.set('n', '<leader>e', '<cmd>:Oil<CR>', {})
+
 vim.keymap.set('n', '<leader>ff', ':FzfLua files<CR>', {})
-vim.keymap.set('n', '<leader>fg', ':FzfLua grep_visual<CR>', {})
+vim.keymap.set('n', '<leader>fg', ':FzfLua grep_project<CR>', {})
+vim.keymap.set('n', '<leader>gs', ':FzfLua git_status<CR>', {})
+
+vim.keymap.set('n', '<S-h>', ':bprev<CR>', {})
+vim.keymap.set('n', '<S-l>', ':bnext<CR>', {})
+
 vim.keymap.set('n', '<A-j>', '<cmd>m .+1<CR>==', {})
 vim.keymap.set('n', '<A-k>', '<cmd>m .-2<CR>==', {})
-
 vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv", {})
 vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", {})
+
+vim.keymap.set('n', '<leader>gb', ":Gisigns toggle_current_line_blame<CR>")
 
 -- Basic Autocommands
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -228,7 +237,20 @@ local servers = {
   -- rubocop = {},
   -- ruby_lsp = {},
   cssls = {},
-  elixirls = {},
+  elixirls = {
+    cmd = { 'elixir-ls' },
+    filetypes = { 'elixir', 'eelixir', 'heex', 'surface'},
+    root_dir = function(bufnr, on_dir)
+      local fname = vim.api.nvim_buf_get_name(bufnr)
+      --- Elixir workspaces may have multiple `mix.exs` files, for an "umbrella" layout or monorepo.
+      --- So we specify `limit=2` and treat the highest one (if any) as the root of an umbrella app.
+      local matches = vim.fs.find({ 'mix.exs' }, { upward = true, limit = 2, path = fname })
+      local child_or_root_path, maybe_umbrella_path = unpack(matches)
+      local root_dir = vim.fs.dirname(maybe_umbrella_path or child_or_root_path)
+
+      on_dir(root_dir)
+    end,
+  },
   biome = { filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" } },
   ts_ls = {
     filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
@@ -306,7 +328,7 @@ require("mason-lspconfig").setup({
 vim.pack.add { { src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' } }
 
 -- Ensure basic parsers are installed
-local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'ruby', 'rust', 'zig' }
+local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'ruby', 'rust', 'zig', 'elixir' }
 require('nvim-treesitter').install(parsers)
 
 ---@param buf integer
@@ -352,3 +374,5 @@ vim.api.nvim_create_autocmd('FileType', {
 		end
 	end,
 })
+
+vim.diagnostic.config({ signs = false})
