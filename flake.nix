@@ -2,15 +2,11 @@
   description = "NixOS configuration Carl0xs";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-
     blog.url = "github:carl0xs/blog";
-
     deploy-rs.url = "github:serokell/deploy-rs";
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

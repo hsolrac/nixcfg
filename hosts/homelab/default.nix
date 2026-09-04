@@ -8,6 +8,7 @@
     ../../modules/services/cloudflared/default.nix
     ../../modules/services/pi-hole/default.nix
     ../../modules/services/znc/default.nix
+    ../../modules/services/pairdrop/default.nix
   ];
 
   # Override common hostname for this specific host
